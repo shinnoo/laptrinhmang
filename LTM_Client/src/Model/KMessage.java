@@ -12,7 +12,7 @@ public class KMessage implements Serializable{
     private int type;
     private Object object;
     private ArrayList<User> lstUser;
-    private ArrayList<Question> questions;
+//    private ArrayList<Question> questions;
 
     public KMessage() {
     }
@@ -22,11 +22,11 @@ public class KMessage implements Serializable{
         this.lstUser = lstUser;
     }
 
-    public KMessage(int type, ArrayList<User> lstUser, ArrayList<Question> questions) {
-        this.type = type;
-        this.lstUser = lstUser;
-        this.questions = questions;
-    }
+//    public KMessage(int type, ArrayList<User> lstUser, ArrayList<Question> questions) {
+//        this.type = type;
+//        this.lstUser = lstUser;
+//        this.questions = questions;
+//    }
 
     public KMessage(int type, Object object) {
         this.type = type;
@@ -55,13 +55,5 @@ public class KMessage implements Serializable{
 
     public void setLstUser(ArrayList<User> lstUser) {
         this.lstUser = lstUser;
-    }
-
-    public ArrayList<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(ArrayList<Question> questions) {
-        this.questions = questions;
     }
 }

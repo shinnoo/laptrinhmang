@@ -150,11 +150,12 @@ public class ClientHandler extends Thread {
             // Gửi chấp nhận
             case 44: {
                 DataFunc df = new DataFunc();
-                ArrayList<Question> questions = new ArrayList<Question>();
-                questions = df.getQuestion();
+//                ArrayList<Question> questions = new ArrayList<Question>();
+//                questions = df.getQuestion();
                 KMessage temp = new KMessage();
                 temp.setType(46);
-                temp.setQuestions(questions);
+                System.out.println("chap nhan");
+//                temp.setQuestions(questions);
                 // Tạo câu hỏi và gửi đến cho các máy
                 for (ClientHandler lstUser1 : Main.lstClient) {
                     lstUser1.SendMessage(temp);
@@ -275,10 +276,10 @@ public class ClientHandler extends Thread {
         SendMessage(temp);
     }
 
-    public void SendMessage(int ty, ArrayList<User> obj, ArrayList<Question> questions) throws IOException {
-        KMessage temp = new KMessage(ty, obj, questions);
-        SendMessage(temp);
-    }
+//    public void SendMessage(int ty, ArrayList<User> obj, ArrayList<Question> questions) throws IOException {
+//        KMessage temp = new KMessage(ty, obj, questions);
+//        SendMessage(temp);
+//    }
 
     public void SendMessage(KMessage msg) throws IOException {
         outputStream.reset();

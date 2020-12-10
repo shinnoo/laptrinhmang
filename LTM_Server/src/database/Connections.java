@@ -13,7 +13,7 @@ public class Connections {
         Connection connection = null;
         try {
             final String driver = "com.mysql.jdbc.Driver";
-            final String server = "jdbc:mysql://localhost:3306/game-havi";
+            final String server = "jdbc:mysql://localhost:3306/game";
             final String user = "root";
             final String pass = "Dung181099!";
             Class.forName(driver);
