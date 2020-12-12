@@ -26,11 +26,11 @@ private String d;
         this.listenServer.receive = this;
         initComponents();
         jLabel1.setText("Người chơi: " + game.getUser().getUserName());
-        jLabel3.setText("Số câu đúng: " + game.getTotalScore());
+        jLabel3.setText("Tổng điểm: " + game.getTotalScore());
         jLabel2.setText("Thời gian hoàn thành: " + game.getTime());
         jLabel7.setText("Kết quả: " + t);
         jLabel4.setText("Người chơi: " + game2.getUser().getUserName());
-        jLabel6.setText("Số câu đúng: " + game2.getTotalScore());
+        jLabel6.setText("Tổng điểm: " + game2.getTotalScore());
         jLabel5.setText("Thời gian hoàn thành: " + game2.getTime());
         dem = 0;
       //  Main.Diem = 0;
@@ -65,7 +65,7 @@ private String d;
         jLabel2.setText("Thời gian hoàn thành: 00:01:14.341");
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel3.setText("Số câu đúng: 5");
+        jLabel3.setText("Tổng điểm: 10");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel4.setText("Duong");
@@ -74,7 +74,7 @@ private String d;
         jLabel5.setText("Thời gian hoàn thành: 00:01:14.341");
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel6.setText("Số câu đúng: 5");
+        jLabel6.setText("Tổng điểm: 10");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         jLabel7.setText("Kết quả: Thắng");
@@ -103,10 +103,6 @@ private String d;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(167, 167, 167))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -135,8 +131,13 @@ private String d;
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(jLabel8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(jLabel8))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(178, 178, 178)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

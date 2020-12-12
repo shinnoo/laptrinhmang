@@ -13,6 +13,10 @@ public class User implements Serializable{
     private String passWord;
     private int online;
     private float point;
+    private int top1;
+    private int top2;
+    private int top3;
+    private int top4;
 
     public User() {
     }
