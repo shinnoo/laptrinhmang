@@ -10,17 +10,17 @@ import java.time.LocalTime;
 
 public class Game implements Serializable {
 
-    private int count;
+    private int totalScore;
     private LocalTime time;
     private User user;
 
-    public Game(int count, LocalTime time) {
-        this.count = count;
+    public Game(int totalScore, LocalTime time) {
+        this.totalScore = totalScore;
         this.time = time;
     }
 
-    public Game(int count, LocalTime time, User user) {
-        this.count = count;
+    public Game(int totalScore, LocalTime time, User user) {
+        this.totalScore = totalScore;
         this.time = time;
         this.user = user;
     }
@@ -36,12 +36,12 @@ public class Game implements Serializable {
         this.user = user;
     }
 
-    public int getCount() {
-        return count;
+    public int getTotalCount() {
+        return totalScore;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setTotalCount(int count) {
+        this.totalScore = count;
     }
 
     public LocalTime getTime() {
