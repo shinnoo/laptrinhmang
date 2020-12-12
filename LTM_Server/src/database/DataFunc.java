@@ -98,9 +98,26 @@ public class DataFunc {
         return true;
     }
 
-    public void updateDiem(User user) {
+    public void updateDiem(User user, int rank) {
         try {
-            String sql = "UPDATE user SET point = ? WHERE userID = ?";
+            String sql = "UPDATE user SET point = ?";
+            String where = " WHERE userID = ?";
+             
+            switch (rank){
+                case 0:
+                    sql += " And top1 = top1 + 1";
+                    break;
+                case 1:
+                    sql += " And top2 = top2 + 1";
+                    break;
+                case 2:
+                    sql += " And top3 = top3 + 1";
+                    break;
+                case 3:
+                    sql += " And top4 = top4 + 1";
+                    break;
+            }
+            sql += " WHERE userID = ?";
             PreparedStatement updateQuery = con.prepareStatement(sql);
             updateQuery.setFloat(1, user.getPoint());
             updateQuery.setInt(2, user.getId());

@@ -21,6 +21,8 @@ public class Main extends javax.swing.JFrame {
     static java.util.List<User> uslist = new ArrayList<User>();
     public static User userRoom; // client 1
     public static User userRoom2; // client 2
+    public static User userRoom3; // client 3
+    public static User userRoom4; // client 4
     public static float Diem = 0;
     private static ServerSocket serverSocket;
 
