@@ -36,13 +36,14 @@ public class Game implements Serializable {
         this.user = user;
     }
 
-    public int getTotalCount() {
+    public int getTotalScore() {
         return totalScore;
     }
 
-    public void setTotalCount(int count) {
-        this.totalScore = count;
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
     }
+
 
     public LocalTime getTime() {
         return time;

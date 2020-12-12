@@ -4,6 +4,7 @@
  */
 package Client;
 
+import Interface.HostConstant;
 import Interface.inReceiveMessage;
 import Model.KMessage;
 import Model.User;
@@ -138,14 +139,13 @@ public class LoginForm extends javax.swing.JFrame implements inReceiveMessage{
 //    }
     void connectServer()
     {
-        IP = "127.0.0.1";
-        Port = "24398";
+        
         
         try {
             if (socket==null)
             {
                 // tạo socket.
-                socket = new Socket(IP, Integer.parseInt(Port));
+                socket = new Socket(HostConstant.IP, Integer.parseInt(HostConstant.PORT));
                 listenServer = new ListenServer(socket);
                 listenServer.receive = this;
                 listenServer.start();
