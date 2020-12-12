@@ -221,6 +221,7 @@ public class ClientHandler extends Thread {
                             }
                         }
                             game1 = null;
+                            game2 = null;
                             Main.isReceived = false;
                             break;
                 }
@@ -230,15 +231,16 @@ public class ClientHandler extends Thread {
                             df.updateDiem(game2.getUser(), 1);
                             d = (float) (game1.getUser().getPoint() + 4);
                             df.updateDiem(game1.getUser(), 0);
-                            SendMessage(61, game2);//Thua
+                            SendMessage(62, game1);//Thua
                                                         for (ClientHandler lstUser1 : Main.lstClient) {
                                 if (lstUser1.user.getUserName().contains(Main.userRoom.getUserName()) && !this.user.getUserName().contains(Main.userRoom.getUserName())) {
-                                    lstUser1.SendMessage(62, game1);
+                                    lstUser1.SendMessage(61, game2);
                                 } else if (lstUser1.user.getUserName().contains(Main.userRoom2.getUserName()) && !this.user.getUserName().contains(Main.userRoom2.getUserName())) {
-                                    lstUser1.SendMessage(62, game1);
+                                    lstUser1.SendMessage(61, game2);
                                 }
                             }
                             game1 = null;
+                            game2 = null;
                             Main.isReceived = false;
                             break;
                 }
@@ -256,6 +258,7 @@ public class ClientHandler extends Thread {
                                 }
                             }
                             game1 = null;
+                            game2 = null;
                             Main.isReceived = false;
                             break;
                 }
