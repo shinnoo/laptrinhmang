@@ -34,6 +34,7 @@ public class ClientHandler extends Thread {
     public static Game game4;
 
     Boolean execute = true;
+    boolean isReceived;
 
     ClientHandler(Socket socket) throws IOException {
         // truyền vào luồng socket
@@ -182,52 +183,70 @@ public class ClientHandler extends Thread {
             // Gửi kết quả
             case 50: {
                 DataFunc df = new DataFunc();
-                if (game1 == null) {
+//                if (game1 != null){
+//                    if (game1.getTotalScore() == 10) {
+//                        Main.Diem = 4;// Gửi lên đầu tiên, đúng 5 câu thì chiên thắng
+//                        game1.getUser().setPoint((game1.getUser().getPoint() + 4));
+//                        df.updateDiem(game1.getUser(), 0);
+//                        SendMessage(100, null);
+//                    } else {
+//                        //thông báo chờ
+//                        SendMessage(100, null);
+//                    }
+//                    break;
+//                }
+
+                if (game1 == null){
                     game1 = (Game) msg.getObject();
-                    if (game1.getTotalScore() == 10) {
-                        Main.Diem = 4;// Gửi lên đầu tiên, đúng 5 câu thì chiên thắng
-                        game1.getUser().setPoint((game1.getUser().getPoint() + 4));
-                        df.updateDiem(game1.getUser(),0);
-                        SendMessage(100, null);
-                    } else {
-                        //thông báo chờ
-                        SendMessage(100, null);
-                    }
-                } else { // Đã có người gửi lên
+                    Main.isReceived = true;
+                    SendMessage(100, null);
+                    break;
+                }
+                
+                if (Main.isReceived){
                     game2 = (Game) msg.getObject();
-                    if (Main.Diem == 4) {
-                        Main.Diem = 3;
-                        SendMessage(62, game1);//Thua
+                }
+                
+                if (game2.getTotalScore() > game1.getTotalScore()) {
+                            float d = (float) (game2.getUser().getPoint() + 4);
+                            df.updateDiem(game2.getUser(), 0);
+                            d = (float) (game1.getUser().getPoint() + 3);
+                            df.updateDiem(game1.getUser(), 1);
+                        SendMessage(61, game1);//Thua
                         for (ClientHandler lstUser1 : Main.lstClient) {
                             if (lstUser1.user.getUserName().contains(Main.userRoom.getUserName()) && !this.user.getUserName().contains(Main.userRoom.getUserName())) {
-                                lstUser1.SendMessage(61, game2);
+                                lstUser1.SendMessage(62, game2);
                             } else if (lstUser1.user.getUserName().contains(Main.userRoom2.getUserName()) && !this.user.getUserName().contains(Main.userRoom2.getUserName())) {
-                                lstUser1.SendMessage(61, game2);
+                                lstUser1.SendMessage(62, game2);
                             }
                         }
-                    } else {
-                        if (game2.getTotalScore() == 10) {
-                            Main.Diem = 4;
-                            //thắng
-                            game2.getUser().setPoint((game2.getUser().getPoint() + 4));
-                            df.updateDiem(game2.getUser(),0);
-                            SendMessage(61, game1);
-                            for (ClientHandler lstUser1 : Main.lstClient) {
+                            game1 = null;
+                            Main.isReceived = false;
+                            break;
+                }
+                
+                if (game2.getTotalScore() < game1.getTotalScore()) {
+                            float d = (float) (game2.getUser().getPoint() + 3);
+                            df.updateDiem(game2.getUser(), 1);
+                            d = (float) (game1.getUser().getPoint() + 4);
+                            df.updateDiem(game1.getUser(), 0);
+                            SendMessage(61, game2);//Thua
+                                                        for (ClientHandler lstUser1 : Main.lstClient) {
                                 if (lstUser1.user.getUserName().contains(Main.userRoom.getUserName()) && !this.user.getUserName().contains(Main.userRoom.getUserName())) {
-                                    lstUser1.SendMessage(62, game2);
+                                    lstUser1.SendMessage(62, game1);
                                 } else if (lstUser1.user.getUserName().contains(Main.userRoom2.getUserName()) && !this.user.getUserName().contains(Main.userRoom2.getUserName())) {
-                                    lstUser1.SendMessage(62, game2);
+                                    lstUser1.SendMessage(62, game1);
                                 }
                             }
-                        } else if (game2.getTotalScore()>game1.getTotalScore()){
-                            float d = (float) (game1.getUser().getPoint() + 3);
-                            df.updateDiem(game1.getUser(),1);
-                            d = (float) (game2.getUser().getPoint() + 3);
-                            df.updateDiem(game2.getUser(),0);
-                            
-                            //hòa
-                            Main.Diem = (float) 0.5;
-                            SendMessage(62, game1);// Gửi thông tin về client
+                            game1 = null;
+                            Main.isReceived = false;
+                            break;
+                }
+                
+                                if (game2.getTotalScore() == game1.getTotalScore()) {
+                            SendMessage(60, game1);// Gửi thông tin về client
+                            SendMessage(60, game2);// Gửi thông tin về client
+                                                        SendMessage(60, game1);// Gửi thông tin về client
                            
                             for (ClientHandler lstUser1 : Main.lstClient) {
                                 if (lstUser1.user.getUserName().contains(Main.userRoom.getUserName()) && !this.user.getUserName().contains(Main.userRoom.getUserName())) {
@@ -236,11 +255,11 @@ public class ClientHandler extends Thread {
                                     lstUser1.SendMessage(60, game2);
                                 }
                             }
-                        }
-                    }
-                    game1 = null;///khởi tạo lại dữ liệu game 1
+                            game1 = null;
+                            Main.isReceived = false;
+                            break;
                 }
-                break;
+//                    game1 = null;///khởi tạo lại dữ liệu game 1
             }
 
             case 70: {
@@ -336,10 +355,10 @@ public class ClientHandler extends Thread {
                 .collect(Collectors.toList());
         return sortedGames;
     }
-    
-    public void processScore(List<Game> games){
-        for(Game g: games){
-            
+
+    public void processScore(List<Game> games) {
+        for (Game g : games) {
+
         }
     }
 }

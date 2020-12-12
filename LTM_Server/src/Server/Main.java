@@ -24,6 +24,7 @@ public class Main extends javax.swing.JFrame {
     public static User userRoom3; // client 3
     public static User userRoom4; // client 4
     public static float Diem = 0;
+    public static boolean isReceived = false;
     private static ServerSocket serverSocket;
 
     //static DataFunc df = new DataFunc();

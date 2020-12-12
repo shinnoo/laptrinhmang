@@ -113,16 +113,16 @@ public class DataFunc {
              
             switch (rank){
                 case 0:
-                    sql += " And top1 = top1 + 1";
+                    sql += ",top1 = top1 + 1";
                     break;
                 case 1:
-                    sql += " And top2 = top2 + 1";
+                    sql += ",top2 = top2 + 1";
                     break;
                 case 2:
-                    sql += " And top3 = top3 + 1";
+                    sql += ",top3 = top3 + 1";
                     break;
                 case 3:
-                    sql += " And top4 = top4 + 1";
+                    sql += ",top4 = top4 + 1";
                     break;
             }
             sql += " WHERE userID = ?";

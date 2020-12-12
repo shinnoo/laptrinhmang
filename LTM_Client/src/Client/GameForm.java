@@ -13,6 +13,7 @@ import Model.KMessage;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -65,14 +66,14 @@ public class GameForm extends javax.swing.JFrame implements inReceiveMessage {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnSubmit.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        btnSubmit.setText("Submit");
+        btnSubmit.setText("Nhận bài");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubmitActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Back");
+        jButton1.setText("Quay lại");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -306,8 +307,9 @@ public class GameForm extends javax.swing.JFrame implements inReceiveMessage {
 //    }
 
     private void result(int dem, LocalTime time) {
-        //jLabel1.setText("Số câu đúng: " + dem);
-        game = new Game(10, time, user);
+        Random rand = new Random();
+        int totalScore = rand.nextInt(10);
+        game = new Game(totalScore, time, user);
         try {
             listenServer.SendMessage(50, game);
         } catch (IOException ex) {
