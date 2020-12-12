@@ -33,6 +33,10 @@ public class DataFunc {
                 us.setPassWord(rs.getString(3));
                 us.setOnline(rs.getInt(4));
                 us.setPoint(rs.getFloat(5));
+                us.setTop1(rs.getInt(6));
+                us.setTop2(rs.getInt(7));
+                us.setTop3(rs.getInt(8));
+                us.setTop4(rs.getInt(9));
                 uslist.add(us);
             }
         } catch (SQLException ex) {
@@ -55,6 +59,10 @@ public class DataFunc {
                 us.setPassWord(rs.getString(3));
                 us.setOnline(rs.getInt(4));
                 us.setPoint(rs.getFloat(5));
+                us.setTop1(rs.getInt(6));
+                us.setTop2(rs.getInt(7));
+                us.setTop3(rs.getInt(8));
+                us.setTop4(rs.getInt(9));
                 uslist.add(us);
             }
         } catch (SQLException ex) {
