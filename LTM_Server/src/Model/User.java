@@ -7,7 +7,8 @@ package Model;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
+public class User implements Serializable {
+
     private int Id;
     private String userName;
     private String passWord;
@@ -98,5 +99,4 @@ public class User implements Serializable{
         this.top4 = top4;
     }
 
-   
 }

@@ -14,56 +14,54 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-
-
 class ListenServer extends Thread {
-        Socket socket;
-        OutputStream outputStream;
-        ObjectOutputStream objectOutputStream;
-        InputStream inputStream;
-        ObjectInputStream objectInputStream;
 
-        public User user;
-        
-        public inReceiveMessage receive;
-        
-        ListenServer(Socket socket) throws IOException {
-            this.socket = socket;
-            outputStream = socket.getOutputStream();
-            objectOutputStream = new ObjectOutputStream(outputStream);
-            inputStream = socket.getInputStream();
-            objectInputStream = new ObjectInputStream(inputStream);
+    Socket socket;
+    OutputStream outputStream;
+    ObjectOutputStream objectOutputStream;
+    InputStream inputStream;
+    ObjectInputStream objectInputStream;
 
-        }
+    public User user;
 
-        @Override
-        public void run() {
-            do {
-                try {
-                    // Nhận dữ liệu
-                    Object o = objectInputStream.readObject();
-                    if (o != null && receive!=null) {
-                        receive.ReceiveMessage((KMessage) o);
-                    }
+    public inReceiveMessage receive;
 
-                } catch (IOException e) {
-                   
-                } catch (ClassNotFoundException ex) {
-                    
-                }
-            }while (true);
-    
-        }
+    ListenServer(Socket socket) throws IOException {
+        this.socket = socket;
+        outputStream = socket.getOutputStream();
+        objectOutputStream = new ObjectOutputStream(outputStream);
+        inputStream = socket.getInputStream();
+        objectInputStream = new ObjectInputStream(inputStream);
 
-        public void SendMessage(int ty, Object obj) throws IOException {
-            KMessage temp = new KMessage(ty, obj);
-            SendMessage(temp);
-        }
-        
-        //Gửi lên server
-        public void SendMessage(KMessage msg) throws IOException {
-            objectOutputStream.reset();
-            objectOutputStream.writeObject(msg);
-        }
     }
-    
+
+    @Override
+    public void run() {
+        do {
+            try {
+                // Nhận dữ liệu
+                Object o = objectInputStream.readObject();
+                if (o != null && receive != null) {
+                    receive.ReceiveMessage((KMessage) o);
+                }
+
+            } catch (IOException e) {
+
+            } catch (ClassNotFoundException ex) {
+
+            }
+        } while (true);
+
+    }
+
+    public void SendMessage(int ty, Object obj) throws IOException {
+        KMessage temp = new KMessage(ty, obj);
+        SendMessage(temp);
+    }
+
+    //Gửi lên server
+    public void SendMessage(KMessage msg) throws IOException {
+        objectOutputStream.reset();
+        objectOutputStream.writeObject(msg);
+    }
+}

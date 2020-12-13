@@ -70,32 +70,6 @@ public class DataFunc {
         return uslist;
     }
 
-//    public ArrayList<Question> getQuestion() {
-//        PreparedStatement stm = null;
-//        ResultSet rs = null;
-//        ArrayList<Question> list = new ArrayList<Question>();
-//
-//        try {
-//            String sql = "SELECT * FROM question ORDER BY RAND() LIMIT 5";
-//            stm = con.prepareStatement(sql);
-//            rs = stm.executeQuery();
-//            while (rs.next()) {
-//                Question question = new Question();
-//                question.setId(rs.getInt(1));
-//                question.setQuestion(rs.getString(2));
-//                question.setAnswerA(rs.getString(3));
-//                question.setAnswerB(rs.getString(4));
-//                question.setAnswerC(rs.getString(5));
-//                question.setAnswerD(rs.getString(6));
-//                question.setCorrectAnswer(rs.getInt(7));
-//                list.add(question);
-//            }
-//        } catch (SQLException ex) {
-//
-//        }
-//        return list;
-//    }
-
     public boolean updateUser(User user) throws SQLException {
         String sqlStatement
                 = "update user set status = ? where userID = ?";
@@ -110,8 +84,8 @@ public class DataFunc {
         try {
             String sql = "UPDATE user SET point = ?";
             String where = " WHERE userID = ?";
-             
-            switch (rank){
+
+            switch (rank) {
                 case 0:
                     sql += ",top1 = top1 + 1";
                     break;

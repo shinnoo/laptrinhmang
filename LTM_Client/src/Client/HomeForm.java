@@ -305,7 +305,7 @@ public class HomeForm extends javax.swing.JFrame implements inReceiveMessage {
                 int i = 1;
                 for (User user : lstUser) {
 //                    System.out.print(user.getUserName()+"--"+user.getTop1()+"--"+user.getTop2()+"--"+user.getTop3()+"--"+user.getTop4()+"--"+user.getPoint());
-                    model.addRow(new Object[]{i++, user.getUserName(), user.getTop1(), user.getTop2(), user.getTop3(),user.getTop4(), user.getPoint()});
+                    model.addRow(new Object[]{i++, user.getUserName(), user.getTop1(), user.getTop2(), user.getTop3(), user.getTop4(), user.getPoint()});
                 }
                 break;
             }

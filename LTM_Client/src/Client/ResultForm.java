@@ -16,11 +16,12 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 public class ResultForm extends javax.swing.JFrame implements inReceiveMessage {
-private String d;
+
+    private String d;
     static ListenServer listenServer = null;
 
     public ResultForm(ListenServer listenServer, Game game2, String t) {
-        d=game2.getUser().getUserName();
+        d = game2.getUser().getUserName();
         setLocationRelativeTo(null);
         this.listenServer = listenServer;
         this.listenServer.receive = this;
@@ -33,7 +34,7 @@ private String d;
         jLabel6.setText("Tổng điểm: " + game2.getTotalScore());
         jLabel5.setText("Thời gian hoàn thành: " + game2.getTime());
         dem = 0;
-      //  Main.Diem = 0;
+        //  Main.Diem = 0;
     }
 
     /**
@@ -173,7 +174,7 @@ private String d;
         // TODO add your handling code here:
         try {
             // gọi vào tham gia trò chơi
-            object=d;
+            object = d;
             listenServer.SendMessage(20, object);
         } catch (Exception e) {
         }

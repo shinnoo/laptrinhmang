@@ -155,13 +155,9 @@ public class ClientHandler extends Thread {
             // Gửi chấp nhận
             case 44: {
                 DataFunc df = new DataFunc();
-//                ArrayList<Question> questions = new ArrayList<Question>();
-//                questions = df.getQuestion();
                 KMessage temp = new KMessage();
                 temp.setType(46);
                 System.out.println("chap nhan");
-//                temp.setQuestions(questions);
-                // Tạo câu hỏi và gửi đến cho các máy
                 for (ClientHandler lstUser1 : Main.lstClient) {
                     lstUser1.SendMessage(temp);
                 }
@@ -183,86 +179,72 @@ public class ClientHandler extends Thread {
             // Gửi kết quả
             case 50: {
                 DataFunc df = new DataFunc();
-//                if (game1 != null){
-//                    if (game1.getTotalScore() == 10) {
-//                        Main.Diem = 4;// Gửi lên đầu tiên, đúng 5 câu thì chiên thắng
-//                        game1.getUser().setPoint((game1.getUser().getPoint() + 4));
-//                        df.updateDiem(game1.getUser(), 0);
-//                        SendMessage(100, null);
-//                    } else {
-//                        //thông báo chờ
-//                        SendMessage(100, null);
-//                    }
-//                    break;
-//                }
-
-                if (game1 == null){
+                if (game1 == null) {
                     game1 = (Game) msg.getObject();
                     Main.isReceived = true;
                     SendMessage(100, null);
                     break;
                 }
-                
-                if (Main.isReceived){
+
+                if (Main.isReceived) {
                     game2 = (Game) msg.getObject();
                 }
-                
+
                 if (game2.getTotalScore() > game1.getTotalScore()) {
-                            float d = (float) (game2.getUser().getPoint() + 4);
-                            df.updateDiem(game2.getUser(), 0);
-                            d = (float) (game1.getUser().getPoint() + 3);
-                            df.updateDiem(game1.getUser(), 1);
-                        SendMessage(61, game1);//Thua
-                        for (ClientHandler lstUser1 : Main.lstClient) {
-                            if (lstUser1.user.getUserName().contains(Main.userRoom.getUserName()) && !this.user.getUserName().contains(Main.userRoom.getUserName())) {
-                                lstUser1.SendMessage(62, game2);
-                            } else if (lstUser1.user.getUserName().contains(Main.userRoom2.getUserName()) && !this.user.getUserName().contains(Main.userRoom2.getUserName())) {
-                                lstUser1.SendMessage(62, game2);
-                            }
+                    float d = (float) (game2.getUser().getPoint() + 4);
+                    df.updateDiem(game2.getUser(), 0);
+                    d = (float) (game1.getUser().getPoint() + 3);
+                    df.updateDiem(game1.getUser(), 1);
+                    SendMessage(61, game1);//Thua
+                    for (ClientHandler lstUser1 : Main.lstClient) {
+                        if (lstUser1.user.getUserName().contains(Main.userRoom.getUserName()) && !this.user.getUserName().contains(Main.userRoom.getUserName())) {
+                            lstUser1.SendMessage(62, game2);
+                        } else if (lstUser1.user.getUserName().contains(Main.userRoom2.getUserName()) && !this.user.getUserName().contains(Main.userRoom2.getUserName())) {
+                            lstUser1.SendMessage(62, game2);
                         }
-                            game1 = null;
-                            game2 = null;
-                            Main.isReceived = false;
-                            break;
+                    }
+                    game1 = null;
+                    game2 = null;
+                    Main.isReceived = false;
+                    break;
                 }
-                
+
                 if (game2.getTotalScore() < game1.getTotalScore()) {
-                            float d = (float) (game2.getUser().getPoint() + 3);
-                            df.updateDiem(game2.getUser(), 1);
-                            d = (float) (game1.getUser().getPoint() + 4);
-                            df.updateDiem(game1.getUser(), 0);
-                            SendMessage(62, game1);//Thua
-                                                        for (ClientHandler lstUser1 : Main.lstClient) {
-                                if (lstUser1.user.getUserName().contains(Main.userRoom.getUserName()) && !this.user.getUserName().contains(Main.userRoom.getUserName())) {
-                                    lstUser1.SendMessage(61, game2);
-                                } else if (lstUser1.user.getUserName().contains(Main.userRoom2.getUserName()) && !this.user.getUserName().contains(Main.userRoom2.getUserName())) {
-                                    lstUser1.SendMessage(61, game2);
-                                }
-                            }
-                            game1 = null;
-                            game2 = null;
-                            Main.isReceived = false;
-                            break;
+                    float d = (float) (game2.getUser().getPoint() + 3);
+                    df.updateDiem(game2.getUser(), 1);
+                    d = (float) (game1.getUser().getPoint() + 4);
+                    df.updateDiem(game1.getUser(), 0);
+                    SendMessage(62, game1);//Thua
+                    for (ClientHandler lstUser1 : Main.lstClient) {
+                        if (lstUser1.user.getUserName().contains(Main.userRoom.getUserName()) && !this.user.getUserName().contains(Main.userRoom.getUserName())) {
+                            lstUser1.SendMessage(61, game2);
+                        } else if (lstUser1.user.getUserName().contains(Main.userRoom2.getUserName()) && !this.user.getUserName().contains(Main.userRoom2.getUserName())) {
+                            lstUser1.SendMessage(61, game2);
+                        }
+                    }
+                    game1 = null;
+                    game2 = null;
+                    Main.isReceived = false;
+                    break;
                 }
-                
-                                if (game2.getTotalScore() == game1.getTotalScore()) {
-                            SendMessage(60, game1);// Gửi thông tin về client
-                            SendMessage(60, game2);// Gửi thông tin về client
-                                                        SendMessage(60, game1);// Gửi thông tin về client
-                           
-                            for (ClientHandler lstUser1 : Main.lstClient) {
-                                if (lstUser1.user.getUserName().contains(Main.userRoom.getUserName()) && !this.user.getUserName().contains(Main.userRoom.getUserName())) {
-                                    lstUser1.SendMessage(60, game2);
-                                } else if (lstUser1.user.getUserName().contains(Main.userRoom2.getUserName()) && !this.user.getUserName().contains(Main.userRoom2.getUserName())) {
-                                    lstUser1.SendMessage(60, game2);
-                                }
-                            }
-                            game1 = null;
-                            game2 = null;
-                            Main.isReceived = false;
-                            break;
+
+                if (game2.getTotalScore() == game1.getTotalScore()) {
+                    SendMessage(60, game1);// Gửi thông tin về client
+                    SendMessage(60, game2);// Gửi thông tin về client
+                    SendMessage(60, game1);// Gửi thông tin về client
+
+                    for (ClientHandler lstUser1 : Main.lstClient) {
+                        if (lstUser1.user.getUserName().contains(Main.userRoom.getUserName()) && !this.user.getUserName().contains(Main.userRoom.getUserName())) {
+                            lstUser1.SendMessage(60, game2);
+                        } else if (lstUser1.user.getUserName().contains(Main.userRoom2.getUserName()) && !this.user.getUserName().contains(Main.userRoom2.getUserName())) {
+                            lstUser1.SendMessage(60, game2);
+                        }
+                    }
+                    game1 = null;
+                    game2 = null;
+                    Main.isReceived = false;
+                    break;
                 }
-//                    game1 = null;///khởi tạo lại dữ liệu game 1
             }
 
             case 70: {
@@ -301,10 +283,6 @@ public class ClientHandler extends Thread {
         SendMessage(temp);
     }
 
-//    public void SendMessage(int ty, ArrayList<User> obj, ArrayList<Question> questions) throws IOException {
-//        KMessage temp = new KMessage(ty, obj, questions);
-//        SendMessage(temp);
-//    }
     public void SendMessage(KMessage msg) throws IOException {
         outputStream.reset();
         outputStream.writeObject(msg);

@@ -130,20 +130,20 @@ public class Main extends javax.swing.JFrame {
             public void run() {
                 System.out.println("SERVER");
                 ServerListener server;
-                  lstClient = new ArrayList<ClientHandler>();
+                lstClient = new ArrayList<ClientHandler>();
                 try {
                     server = new ServerListener();
                     server.start();
                 } catch (IOException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
-              
+
                 new Main().setVisible(true);
             }
         });
     }
 
-   private static void openServer(int portNumber) {
+    private static void openServer(int portNumber) {
         try {
             serverSocket = new ServerSocket(portNumber);
             if (serverSocket == null) {
@@ -156,7 +156,7 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
- static class ServerListener extends Thread {
+    static class ServerListener extends Thread {
 
         ServerListener() throws IOException {
             openServer(24398);
@@ -179,11 +179,9 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         }
-        
-         // mở server
-    
-    } 
 
+        // mở server
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_refresh;

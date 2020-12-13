@@ -22,14 +22,14 @@ import javax.swing.JOptionPane;
  *
  * @author admin
  */
-public class LoginForm extends javax.swing.JFrame implements inReceiveMessage{
-    
+public class LoginForm extends javax.swing.JFrame implements inReceiveMessage {
+
     static public User user = null;
     static public String IP;
     static public String Port;
     static public Socket socket = null;
     ListenServer listenServer = null;
-    
+
     /**
      * Creates new form Main
      */
@@ -37,7 +37,7 @@ public class LoginForm extends javax.swing.JFrame implements inReceiveMessage{
         initComponents();
         setLocationRelativeTo(null);
         //setFontForRegister();
-        
+
     }
 
     /**
@@ -136,13 +136,10 @@ public class LoginForm extends javax.swing.JFrame implements inReceiveMessage{
 //        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
 //        jLabel4.setFont(font.deriveFont(attributes));
 //    }
-    void connectServer()
-    {
-        
-        
+    void connectServer() {
+
         try {
-            if (socket==null)
-            {
+            if (socket == null) {
                 // tạo socket.
                 socket = new Socket(HostConstant.IP, Integer.parseInt(HostConstant.PORT));
                 listenServer = new ListenServer(socket);
@@ -159,40 +156,38 @@ public class LoginForm extends javax.swing.JFrame implements inReceiveMessage{
             return;
         }
     }
-    
+
     private void bt_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_loginActionPerformed
         // TODO add your handling code here:
         String username;
-        String password;        
-        
+        String password;
+
         connectServer();
         // lấy username, password        
         username = tx_username.getText();
         password = String.valueOf(tx_password.getPassword());
-        
-        if(username.equals("") || password.equals(""))
-        {
+
+        if (username.equals("") || password.equals("")) {
             JOptionPane.showMessageDialog(null, "Không được để trống username, password", "Error", 1);
             return;
-        } 
-        if (listenServer!=null)
-        {
+        }
+        if (listenServer != null) {
             try {
                 // gửi username, password lên sever
                 listenServer.SendMessage(0, new User(username, password));
             } catch (IOException ex) {
                 Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }   
+        }
     }//GEN-LAST:event_bt_loginActionPerformed
 
     private void tx_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tx_passwordKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyChar()=='\n')
+        if (evt.getKeyChar() == '\n') {
             bt_loginActionPerformed(null);
+        }
     }//GEN-LAST:event_tx_passwordKeyPressed
 
-    
     /**
      * @param args the command line arguments
      */
@@ -249,7 +244,6 @@ public class LoginForm extends javax.swing.JFrame implements inReceiveMessage{
                 user = (User) msg.getObject();
                 if (user != null) {
                     listenServer.user = user;
-                    
 
                     //Nếu có đối tượng thì mở giao diện Danh sách bạn
                     /* Create and display the form */

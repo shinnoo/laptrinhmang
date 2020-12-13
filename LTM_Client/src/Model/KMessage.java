@@ -7,12 +7,11 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+public class KMessage implements Serializable {
 
-public class KMessage implements Serializable{
     private int type;
     private Object object;
     private ArrayList<User> lstUser;
-//    private ArrayList<Question> questions;
 
     public KMessage() {
     }
@@ -21,12 +20,6 @@ public class KMessage implements Serializable{
         this.type = type;
         this.lstUser = lstUser;
     }
-
-//    public KMessage(int type, ArrayList<User> lstUser, ArrayList<Question> questions) {
-//        this.type = type;
-//        this.lstUser = lstUser;
-//        this.questions = questions;
-//    }
 
     public KMessage(int type, Object object) {
         this.type = type;

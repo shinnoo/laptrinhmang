@@ -12,6 +12,6 @@ import java.io.IOException;
  * @author admin
  */
 public interface inReceiveMessage {
-    
+
     public void ReceiveMessage(KMessage msg) throws IOException;
 }

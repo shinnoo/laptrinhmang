@@ -27,7 +27,6 @@ public class GameForm extends javax.swing.JFrame implements inReceiveMessage {
 
     static ListenServer listenServer = null;
     DefaultListModel<String> model = new DefaultListModel<>();
-//    ArrayList<Question> questions;
     static Game game;
     static Game game2;
     static int dem = 0;
@@ -37,7 +36,6 @@ public class GameForm extends javax.swing.JFrame implements inReceiveMessage {
         setLocationRelativeTo(null);
         this.listenServer = listenServer;
         this.listenServer.receive = this;
-//        questions = new ArrayList<>();
         try {
             listenServer.SendMessage(40, null);
         } catch (IOException ex) {
@@ -115,37 +113,21 @@ public class GameForm extends javax.swing.JFrame implements inReceiveMessage {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-//        if (cbAns1.getSelectedIndex() == questions.get(0).getCorrectAnswer()) {
-//            dem++;
-//        }
-//        if (cbAns2.getSelectedIndex() == questions.get(1).getCorrectAnswer()) {
-//            dem++;
-//        }
-//        if (cbAns3.getSelectedIndex() == questions.get(2).getCorrectAnswer()) {
-//            dem++;
-//        }
-//        if (cbAns4.getSelectedIndex() == questions.get(3).getCorrectAnswer()) {
-//            dem++;
-//        }
-//        if (cbAns5.getSelectedIndex() == questions.get(4).getCorrectAnswer()) {
-//            dem++;
-//        }
-
         LocalTime time = java.time.LocalTime.now();
         result(dem, time);
-      
+
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                    java.awt.EventQueue.invokeLater(new Runnable() {
-                        public void run() {
-                            System.out.println("CLIENT");
-                            //new Main(listenServer).setVisible(true);
-                            HomeForm homeForm = new HomeForm(listenServer);
-                            homeForm.setVisible(true);
-                        }
-                    });
-                    this.setVisible(false);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                System.out.println("CLIENT");
+                //new Main(listenServer).setVisible(true);
+                HomeForm homeForm = new HomeForm(listenServer);
+                homeForm.setVisible(true);
+            }
+        });
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -208,12 +190,6 @@ public class GameForm extends javax.swing.JFrame implements inReceiveMessage {
                 }
                 break;
             }
-            // Người chơi đồng ý và nhận dự liệu
-            case 46: {
-//                questions = msg.getQuestions();// Nhận câu hỏi
-//                setQuestion();
-                break;
-            }
             // Người chơi không đồng ý
             case 47: {
                 JOptionPane.showMessageDialog(null, "Người chơi không đồng ý!", "Message", 1);
@@ -262,49 +238,6 @@ public class GameForm extends javax.swing.JFrame implements inReceiveMessage {
             }
         }
     }
-
-//    private void setQuestion() {
-//        //lấy câu hỏi
-//        lbQues1.setText(questions.get(0).getQuestion());
-//        lbQues2.setText(questions.get(1).getQuestion());
-//        lbQues3.setText(questions.get(2).getQuestion());
-//        lbQues4.setText(questions.get(3).getQuestion());
-//        lbQues5.setText(questions.get(4).getQuestion());
-//
-//         cbAns1.removeAllItems();
-//          cbAns2.removeAllItems();
-//          cbAns3.removeAllItems();
-//          cbAns4.removeAllItems();
-//          cbAns5.removeAllItems();
-//
-//        //lấy đáp án
-//        cbAns1.addItem(questions.get(0).getAnswerA());
-//        cbAns1.addItem(questions.get(0).getAnswerB());
-//        cbAns1.addItem(questions.get(0).getAnswerC());
-//        cbAns1.addItem(questions.get(0).getAnswerD());
-//
-//        cbAns2.addItem(questions.get(1).getAnswerA());
-//        cbAns2.addItem(questions.get(1).getAnswerB());
-//        cbAns2.addItem(questions.get(1).getAnswerC());
-//        cbAns2.addItem(questions.get(1).getAnswerD());
-//
-//        cbAns3.addItem(questions.get(2).getAnswerA());
-//        cbAns3.addItem(questions.get(2).getAnswerB());
-//        cbAns3.addItem(questions.get(2).getAnswerC());
-//        cbAns3.addItem(questions.get(2).getAnswerD());
-//
-//        cbAns4.addItem(questions.get(3).getAnswerA());
-//        cbAns4.addItem(questions.get(3).getAnswerB());
-//        cbAns4.addItem(questions.get(3).getAnswerC());
-//        cbAns4.addItem(questions.get(3).getAnswerD());
-//
-//        cbAns5.addItem(questions.get(4).getAnswerA());
-//        cbAns5.addItem(questions.get(4).getAnswerB());
-//        cbAns5.addItem(questions.get(4).getAnswerC());
-//        cbAns5.addItem(questions.get(4).getAnswerD());
-//
-//
-//    }
 
     private void result(int dem, LocalTime time) {
         Random rand = new Random();
