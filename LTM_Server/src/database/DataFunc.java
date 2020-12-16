@@ -47,11 +47,29 @@ public class DataFunc {
     public ArrayList<User> getUserRank() {
         PreparedStatement stm = null;
         ResultSet rs = null;
+        
+        
+        
+        
+        
+        // tạo mới 1 list
         ArrayList<User> uslist = new ArrayList<User>();
         try {
+            //câu query
             String sql = "SELECT * FROM user ORDER BY point DESC";
+            
             stm = con.prepareStatement(sql);
+            
+            
+            
+            
+            //thực hiện query
+            //lấy kết quả trả về cho vào "rs"
             rs = stm.executeQuery();
+            
+            
+            
+            // từng thằng user ở trong result trả về sẽ được add vào list đó
             while (rs.next()) {
                 User us = new User();
                 us.setId(rs.getInt(1));
@@ -67,24 +85,25 @@ public class DataFunc {
             }
         } catch (SQLException ex) {
         }
+        
+        
+        
+        //trả về list
         return uslist;
     }
 
-    public boolean updateUser(User user) throws SQLException {
+    public void updateUser(User user) throws SQLException {
         String sqlStatement
                 = "update user set status = ? where userID = ?";
         PreparedStatement updateQuery = con.prepareStatement(sqlStatement);
         updateQuery.setInt(1, user.getOnline());
         updateQuery.setInt(2, user.getId());
         updateQuery.execute();
-        return true;
     }
 
     public void updateDiem(User user, int rank) {
         try {
             String sql = "UPDATE user SET point = ?";
-            String where = " WHERE userID = ?";
-
             switch (rank) {
                 case 0:
                     sql += ",top1 = top1 + 1";
@@ -105,7 +124,7 @@ public class DataFunc {
             updateQuery.setInt(2, user.getId());
             updateQuery.execute();
         } catch (SQLException ex) {
-            Logger.getLogger(DataFunc.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.print(ex);
         }
     }
 }

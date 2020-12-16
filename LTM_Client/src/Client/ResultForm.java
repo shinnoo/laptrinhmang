@@ -6,8 +6,8 @@
 package Client;
 
 import Interface.inReceiveMessage;
+import static Client.GameForm.game;
 import static Client.HomeForm.object;
-import static Client.GameForm.dem;
 import static Client.GameForm.game;
 import Model.Game;
 import Model.KMessage;
@@ -33,7 +33,6 @@ public class ResultForm extends javax.swing.JFrame implements inReceiveMessage {
         jLabel4.setText("Người chơi: " + game2.getUser().getUserName());
         jLabel6.setText("Tổng điểm: " + game2.getTotalScore());
         jLabel5.setText("Thời gian hoàn thành: " + game2.getTime());
-        dem = 0;
         //  Main.Diem = 0;
     }
 

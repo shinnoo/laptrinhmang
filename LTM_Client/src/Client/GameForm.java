@@ -5,14 +5,12 @@
  */
 package Client;
 
-import Interface.inReceiveMessage;
 import static Client.LoginForm.user;
+import Interface.inReceiveMessage;
 import Model.Game;
 import Model.KMessage;
-
 import java.io.IOException;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +27,6 @@ public class GameForm extends javax.swing.JFrame implements inReceiveMessage {
     DefaultListModel<String> model = new DefaultListModel<>();
     static Game game;
     static Game game2;
-    static int dem = 0;
 
     public GameForm(ListenServer listenServer) {
         initComponents();
@@ -114,7 +111,7 @@ public class GameForm extends javax.swing.JFrame implements inReceiveMessage {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         LocalTime time = java.time.LocalTime.now();
-        result(dem, time);
+        sendResult(time);
 
     }//GEN-LAST:event_btnSubmitActionPerformed
 
@@ -239,7 +236,7 @@ public class GameForm extends javax.swing.JFrame implements inReceiveMessage {
         }
     }
 
-    private void result(int dem, LocalTime time) {
+    private void sendResult(LocalTime time) {
         Random rand = new Random();
         int totalScore = rand.nextInt(10);
         game = new Game(totalScore, time, user);

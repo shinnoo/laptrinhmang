@@ -53,17 +53,20 @@ public class ClientHandler extends Thread {
                 User temp = (User) msg.getObject();// Lấy dữ liệu
                 DataFunc df = new DataFunc();
                 ArrayList<User> lstUser = new ArrayList<User>();
+                //get all user 
                 lstUser = df.getUserList();
                 for (User obj : lstUser) {
+                    //ktra nếu thằng truyền lên (obj) trùng với 1 thằng trong db
                     if (obj.getUserName().contains(temp.getUserName()) && obj.getPassWord().contains(temp.getPassWord())) {
                         user = obj;
                     }
                 }
+                //nếu có
                 if (user != null) {
                     User objU = user;
                     objU.setOnline(1);
                     try {
-                        Boolean a = df.updateUser(objU);
+                        df.updateUser(objU);
                     } catch (SQLException ex) {
                         Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -192,8 +195,10 @@ public class ClientHandler extends Thread {
 
                 if (game2.getTotalScore() > game1.getTotalScore()) {
                     float d = (float) (game2.getUser().getPoint() + 4);
+                    game2.getUser().setPoint(d);
                     df.updateDiem(game2.getUser(), 0);
                     d = (float) (game1.getUser().getPoint() + 3);
+                    game1.getUser().setPoint(d);
                     df.updateDiem(game1.getUser(), 1);
                     SendMessage(61, game1);//Thua
                     for (ClientHandler lstUser1 : Main.lstClient) {
@@ -211,8 +216,10 @@ public class ClientHandler extends Thread {
 
                 if (game2.getTotalScore() < game1.getTotalScore()) {
                     float d = (float) (game2.getUser().getPoint() + 3);
+                    game2.getUser().setPoint(d);
                     df.updateDiem(game2.getUser(), 1);
                     d = (float) (game1.getUser().getPoint() + 4);
+                    game1.getUser().setPoint(d);
                     df.updateDiem(game1.getUser(), 0);
                     SendMessage(62, game1);//Thua
                     for (ClientHandler lstUser1 : Main.lstClient) {
@@ -230,8 +237,6 @@ public class ClientHandler extends Thread {
 
                 if (game2.getTotalScore() == game1.getTotalScore()) {
                     SendMessage(60, game1);// Gửi thông tin về client
-                    SendMessage(60, game2);// Gửi thông tin về client
-                    SendMessage(60, game1);// Gửi thông tin về client
 
                     for (ClientHandler lstUser1 : Main.lstClient) {
                         if (lstUser1.user.getUserName().contains(Main.userRoom.getUserName()) && !this.user.getUserName().contains(Main.userRoom.getUserName())) {
@@ -246,7 +251,7 @@ public class ClientHandler extends Thread {
                     break;
                 }
             }
-
+            //tb thoát phòng
             case 70: {
                 DataFunc df = new DataFunc();
                 ArrayList<User> lstUser = new ArrayList<User>();
@@ -273,8 +278,8 @@ public class ClientHandler extends Thread {
     }
     // Các hàm gửi tin với các đối số khác nhau
 
-    public void SendMessage(int ty, Object obj) throws IOException {
-        KMessage temp = new KMessage(ty, obj);
+    public void SendMessage(int type, Object obj) throws IOException {
+        KMessage temp = new KMessage(type, obj);
         SendMessage(temp);
     }
 
@@ -283,6 +288,7 @@ public class ClientHandler extends Thread {
         SendMessage(temp);
     }
 
+    //
     public void SendMessage(KMessage msg) throws IOException {
         outputStream.reset();
         outputStream.writeObject(msg);
@@ -293,7 +299,7 @@ public class ClientHandler extends Thread {
         User objU = this.user;
         objU.setOnline(0);
         try {
-            Boolean a = df.updateUser(objU);
+            df.updateUser(objU);
         } catch (Exception e) {
         }
         Main.lstClient.remove(this);
