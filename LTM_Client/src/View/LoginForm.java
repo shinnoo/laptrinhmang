@@ -2,11 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Client;
+package View;
 
-import Interface.HostConstant;
-import Interface.inReceiveMessage;
-import Model.KMessage;
+import Control.ListenServer;
+import Control.HostConstant;
+import Control.inReceiveMessage;
+import Model.Message;
 import Model.User;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
@@ -237,7 +238,7 @@ public class LoginForm extends javax.swing.JFrame implements inReceiveMessage {
 
     @Override
     //Hàm kiểm nhận đối tượng kiểm tra từ server
-    public void ReceiveMessage(KMessage msg) throws IOException {
+    public void ReceiveMessage(Message msg) throws IOException {
         switch (msg.getType()) {
             case 0: {
                 // Nhận dữ liệu từ server

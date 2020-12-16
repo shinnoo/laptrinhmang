@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Server;
+package Control;
 
 import Model.Game;
-import Model.KMessage;
+import Model.Message;
 import Model.User;
 import database.DataFunc;
 import java.io.IOException;
@@ -45,7 +45,7 @@ public class ClientHandler extends Thread {
     }
     // Nhận dữ liệu
 
-    void ReceiveMessage(KMessage msg) throws IOException {
+    void ReceiveMessage(Message msg) throws IOException {
 
         switch (msg.getType()) {
             // Nếu type = 0: Nhận từ Form Login. check đăng nhập
@@ -158,7 +158,7 @@ public class ClientHandler extends Thread {
             // Gửi chấp nhận
             case 44: {
                 DataFunc df = new DataFunc();
-                KMessage temp = new KMessage();
+                Message temp = new Message();
                 temp.setType(46);
                 System.out.println("chap nhan");
                 for (ClientHandler lstUser1 : Main.lstClient) {
@@ -279,17 +279,17 @@ public class ClientHandler extends Thread {
     // Các hàm gửi tin với các đối số khác nhau
 
     public void SendMessage(int type, Object obj) throws IOException {
-        KMessage temp = new KMessage(type, obj);
+        Message temp = new Message(type, obj);
         SendMessage(temp);
     }
 
     public void SendMessage(int ty, ArrayList<User> obj) throws IOException {
-        KMessage temp = new KMessage(ty, obj);
+        Message temp = new Message(ty, obj);
         SendMessage(temp);
     }
 
     //
-    public void SendMessage(KMessage msg) throws IOException {
+    public void SendMessage(Message msg) throws IOException {
         outputStream.reset();
         outputStream.writeObject(msg);
     }
@@ -320,7 +320,7 @@ public class ClientHandler extends Thread {
             try {
                 Object o = inputStream.readObject();
                 if (o != null) {
-                    ReceiveMessage((KMessage) o);
+                    ReceiveMessage((Message) o);
                 }
 
             } catch (IOException e) {

@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Client;
+package View;
 
-import Interface.inReceiveMessage;
-import static Client.GameForm.game;
-import static Client.HomeForm.object;
-import static Client.GameForm.game;
+import Control.ListenServer;
+import Control.inReceiveMessage;
+import static View.GameForm.game;
+import static View.HomeForm.object;
+import static View.GameForm.game;
 import Model.Game;
-import Model.KMessage;
+import Model.Message;
 //import Server.Main;
 import java.io.IOException;
 import javax.swing.JOptionPane;
@@ -59,7 +60,7 @@ public class ResultForm extends javax.swing.JFrame implements inReceiveMessage {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel1.setText("Quyen");
+        jLabel1.setText("Dung");
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel2.setText("Thời gian hoàn thành: 00:01:14.341");
@@ -68,13 +69,13 @@ public class ResultForm extends javax.swing.JFrame implements inReceiveMessage {
         jLabel3.setText("Tổng điểm: 10");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel4.setText("Duong");
+        jLabel4.setText("Cong");
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabel5.setText("Thời gian hoàn thành: 00:01:14.341");
 
         jLabel6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel6.setText("Tổng điểm: 10");
+        jLabel6.setText("Tổng điểm: 9");
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         jLabel7.setText("Kết quả: Thắng");
@@ -240,7 +241,7 @@ public class ResultForm extends javax.swing.JFrame implements inReceiveMessage {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void ReceiveMessage(KMessage msg) throws IOException {
+    public void ReceiveMessage(Message msg) throws IOException {
         switch (msg.getType()) {
             // Nhận yêu cầu chơi 
             case 30: {
@@ -272,7 +273,7 @@ public class ResultForm extends javax.swing.JFrame implements inReceiveMessage {
             case 71: {
                 JOptionPane.showMessageDialog(null, "Nguoi choi da thoat khoi phong!", "Message", 1);
                 this.setVisible(false);
-                HomeForm homeForm = new HomeForm(listenServer);
+                HomeForm homeForm = new HomeForm(listenServer); 
                 homeForm.setVisible(true);
                 break;
             }

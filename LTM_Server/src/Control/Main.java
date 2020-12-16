@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Server;
+package Control;
 
 import Model.User;
 
-import Server.ClientHandler;
+import Control.ClientHandler;
 import java.awt.TextArea;
 import java.io.IOException;
 import java.net.ServerSocket;

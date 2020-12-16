@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Client;
+package View;
 
-import static Client.LoginForm.user;
-import Interface.inReceiveMessage;
+import Control.ListenServer;
+import static View.LoginForm.user;
+import Control.inReceiveMessage;
 import Model.Game;
-import Model.KMessage;
+import Model.Message;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.Random;
@@ -174,7 +175,7 @@ public class GameForm extends javax.swing.JFrame implements inReceiveMessage {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void ReceiveMessage(KMessage msg) throws IOException {
+    public void ReceiveMessage(Message msg) throws IOException {
         switch (msg.getType()) {
             // Nhận yêu cầu chơi 
             case 41: {

@@ -7,21 +7,21 @@ package Model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class KMessage implements Serializable {
+public class Message implements Serializable {
 
     private int type;
     private Object object;
     private ArrayList<User> lstUser;
 
-    public KMessage() {
+    public Message() {
     }
 
-    public KMessage(int type, ArrayList<User> lstUser) {
+    public Message(int type, ArrayList<User> lstUser) {
         this.type = type;
         this.lstUser = lstUser;
     }
 
-    public KMessage(int type, Object object) {
+    public Message(int type, Object object) {
         this.type = type;
         this.object = object;
     }
@@ -49,5 +49,4 @@ public class KMessage implements Serializable {
     public void setLstUser(ArrayList<User> lstUser) {
         this.lstUser = lstUser;
     }
-
 }

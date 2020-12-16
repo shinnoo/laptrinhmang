@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Client;
+package Control;
 
-import Interface.inReceiveMessage;
-import Model.KMessage;
+import Control.inReceiveMessage;
+import Model.Message;
 import Model.User;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,7 +14,7 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-class ListenServer extends Thread {
+public class ListenServer extends Thread {
 
     Socket socket;
     OutputStream outputStream;
@@ -26,7 +26,7 @@ class ListenServer extends Thread {
 
     public inReceiveMessage receive;
 
-    ListenServer(Socket socket) throws IOException {
+    public ListenServer(Socket socket) throws IOException {
         this.socket = socket;
         outputStream = socket.getOutputStream();
         objectOutputStream = new ObjectOutputStream(outputStream);
@@ -42,7 +42,7 @@ class ListenServer extends Thread {
                 // Nhận dữ liệu
                 Object o = objectInputStream.readObject();
                 if (o != null && receive != null) {
-                    receive.ReceiveMessage((KMessage) o);
+                    receive.ReceiveMessage((Message) o);
                 }
 
             } catch (IOException e) {
@@ -55,12 +55,12 @@ class ListenServer extends Thread {
     }
 
     public void SendMessage(int ty, Object obj) throws IOException {
-        KMessage temp = new KMessage(ty, obj);
+        Message temp = new Message(ty, obj);
         SendMessage(temp);
     }
 
     //Gửi lên server
-    public void SendMessage(KMessage msg) throws IOException {
+    public void SendMessage(Message msg) throws IOException {
         objectOutputStream.reset();
         objectOutputStream.writeObject(msg);
     }

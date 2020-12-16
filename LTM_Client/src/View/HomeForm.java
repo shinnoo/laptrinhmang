@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Client;
+package View;
 
-import Interface.inReceiveMessage;
-import static Client.LoginForm.user;
-import Model.KMessage;
+import Control.ListenServer;
+import Control.inReceiveMessage;
+import static View.LoginForm.user;
+import Model.Message;
 import Model.User;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -251,7 +252,7 @@ public class HomeForm extends javax.swing.JFrame implements inReceiveMessage {
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void ReceiveMessage(KMessage msg) throws IOException {
+    public void ReceiveMessage(Message msg) throws IOException {
         switch (msg.getType()) {
             // Nhận dữ liệu từ server rồi hiển thị những người online
             case 21: {
